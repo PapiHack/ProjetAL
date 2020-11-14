@@ -37,16 +37,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany('App\Role');
     }
+
     //On verifie si l'utilisateur a le role admin ou pas;
-    public function isAdmin(){
-        return $this->roles()->where('name', 'admin')->first();
-    }
-    public function hasAnyRole(){
+    public function isAdmin()
+    {
         return $this->roles()->where('name', 'admin')->first();
     }
 
-
+    public function hasAnyRole()
+    {
+        return $this->roles()->where('name', 'admin')->first();
+    }
 }

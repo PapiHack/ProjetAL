@@ -36,6 +36,22 @@
                                     @enderror
                                 </div>
 
+
+                                <label for="categorie" class="col-md-6 col-form-label">{{ __('Categorie') }}</label>
+                                <div class="col-md-12">
+                                    <select name="categorie" id="categorie" required autocomplete="categorie" autofocus class="form-control @error('categorie') is-invalid @enderror">
+                                        @foreach ($categories as $categorie)
+                                            <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('categorie')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                             </div>
                                 <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-success" style="color: green;">Ajouter</button></div>

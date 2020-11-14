@@ -10,10 +10,11 @@ class Categorie extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'id','name'
+        'id', 'name'
     ];
-    public function articles(){
+
+    public function articles()
+    {
         return $this->hasMany('App\Article');
     }
-    
 }

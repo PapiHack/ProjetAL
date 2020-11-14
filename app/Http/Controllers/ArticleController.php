@@ -15,10 +15,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        
+
         $articles = Article::latest()->paginate(5);
-  
-        return view('articles.index',compact('articles'))
+
+        return view('articles.index', compact('articles'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -29,7 +29,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $categories = Categorie::all();
+        return view('articles.create', compact('categories'));
     }
 
     /**
@@ -41,20 +42,23 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titre'=>'required',
-            'description'=>'required',
-            
-
+            'titre' => 'required',
+            'description' => 'required'
         ]);
-         categorie()->articles()->create([
+        // dd($request);
+        $article = new Article($request->except(['_token']));
+        $article->categorie_id = $request->input('categorie');
+        // dd($article);
+        $article->save();
+        /*
+        categorie()->articles()->create([
             'titre' => $request->get('id_client'),
             'description' => $request->get('description'),
 
-         ]);
-          return redirect()->route('articles.index')
-          ->with('success','Article created successfully.');
-    
-    
+        ]);
+        */
+        return redirect()->route('articles.index')
+            ->with('success', 'Article created successfully.');
     }
 
     /**
@@ -76,8 +80,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $categories= Categorie::all();
-        return view('articles.edit',[
+        $categories = Categorie::all();
+        return view('articles.edit', [
             'article' => $article,
             'categories' => $categories
 
@@ -93,7 +97,6 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-       
     }
 
     /**

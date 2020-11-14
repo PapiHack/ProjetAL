@@ -10,9 +10,11 @@ class Article extends Model
     protected $table = 'articles';
 
     protected $fillable = [
-        'titre','description'
+        'titre', 'description', 'categorie_id'
     ];
-    public function categorie(){
-    	return $this->belongsTo('App\Categorie');
+
+    public function categorie()
+    {
+        return $this->belongsTo('App\Categorie');
     }
 }

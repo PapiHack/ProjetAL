@@ -33,9 +33,9 @@
                         <tbody>
                          @foreach($articles  as $article)
                             <tr style="text-align: center;" >
-                                <td  >{{$article->titre}}</td>
+                                <td>{{$article->titre}}</td>
                                 <td>{{$article->description}} </td>
-                                <td>hjjj </td>  
+                                <td>{{ $article->categorie->name }} </td>  
                                  <td>   
                                     <a href="{{route('articles.edit',$article->id)}}" style="color: #FFC107;" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                     
