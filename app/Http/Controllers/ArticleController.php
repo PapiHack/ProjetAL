@@ -45,18 +45,11 @@ class ArticleController extends Controller
             'titre' => 'required',
             'description' => 'required'
         ]);
-        // dd($request);
+
         $article = new Article($request->except(['_token']));
         $article->categorie_id = $request->input('categorie');
-        // dd($article);
         $article->save();
-        /*
-        categorie()->articles()->create([
-            'titre' => $request->get('id_client'),
-            'description' => $request->get('description'),
 
-        ]);
-        */
         return redirect()->route('articles.index')
             ->with('success', 'Article created successfully.');
     }
